@@ -3,7 +3,6 @@ package qqmusic
 import (
 	"encoding/base64"
 	"encoding/json"
-	"errors"
 	"fmt"
 	"log"
 	"math/rand"
@@ -16,6 +15,8 @@ import (
 	"github.com/meloshub/meloshub/model"
 )
 
+<<<<<<< HEAD
+=======
 var (
 	ErrSearchSong      = errors.New("[QQMusicAdapter] Failed to search song")
 	ErrGetPlayURL      = errors.New("[QQMusicAdapter] Failed to get play url")
@@ -71,6 +72,7 @@ type singerItem struct {
 	Name string `json:"name"`
 }
 
+>>>>>>> 1e3731312fa6acfb107ae67687dd4197b0cf5b18
 type QQMusicAdapter struct {
 	adapter.Base
 	qqNumber int //登录账户的qq号，未登录时默认为0
@@ -145,29 +147,11 @@ func (a *QQMusicAdapter) Search(keyword string, options adapter.SearchOptions) (
 			Singers:   singerList,
 			AlbumId:   song.Albummid,
 			AlbumName: song.Albumname,
-			Playable:  song.Pay.Payplay == 0, //播放无需付费即可播放
+			Playable:  song.Pay.Payplay == 0, //播放无需付费即为可播放
 		})
 	}
 
 	return results, nil
-}
-
-type requestResult struct {
-	Code int `json:"code"`
-	Req0 struct {
-		Code int `json:"code"`
-		Data struct {
-			MidURLInfo []midURLInfo `json:"midurlinfo"`
-			Expiration int          `json:"expiration"`
-		} `json:"data"`
-	} `json:"req_0"`
-}
-
-type midURLInfo struct {
-	Songmid  string `json:"songmid"`
-	Filename string `json:"filename"`
-	Purl     string `json:"purl"`
-	Vkey     string `json:"vkey"`
 }
 
 func (a *QQMusicAdapter) PlayURL(id string) (string, error) {
@@ -271,6 +255,8 @@ func (a *QQMusicAdapter) Lyrics(id string) (string, error) {
 	return string(lyric), nil
 }
 
+<<<<<<< HEAD
+=======
 type picUrlItem struct {
 	PicUrl string `json:"picurl"`
 }
@@ -294,6 +280,7 @@ type albumDetailResult struct {
 	} `json:"data"`
 }
 
+>>>>>>> 1e3731312fa6acfb107ae67687dd4197b0cf5b18
 func (a *QQMusicAdapter) AlbumDetail(id string) (model.Album, error) {
 	api := "https://c6.y.qq.com/v8/fcg-bin/musicmall.fcg"
 	params := map[string]string{
